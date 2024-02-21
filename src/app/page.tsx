@@ -4,6 +4,7 @@ import { ListForm } from './components/listForm/ListForm'
 import { store } from './redux/store'
 import { ListProduct } from './components/listProduct/ListProduct'
 import { SaveTemplate } from './components/saveTemplate/SaveTemplate'
+import { ToastContainer } from 'react-toastify'
 
 export default function Home() {
     return (
@@ -16,6 +17,18 @@ export default function Home() {
                 <ListProduct />
                 <SaveTemplate />
             </main>
+            <ToastContainer
+                position='top-left'
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme='colored'
+            />
         </Provider>
     )
 }

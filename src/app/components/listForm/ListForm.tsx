@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 export const ListForm = () => {
@@ -61,18 +61,6 @@ export const ListForm = () => {
                     Добавить
                 </button>
             </div>
-            <ToastContainer
-                position='top-left'
-                autoClose={3000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme='colored'
-            />
         </div>
     )
 }

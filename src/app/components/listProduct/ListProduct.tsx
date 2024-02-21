@@ -8,6 +8,7 @@ import { BsTrash2Fill } from 'react-icons/bs'
 import { CiEdit } from 'react-icons/ci'
 import { ListItem } from '@/app/redux/types/tipes'
 import { formattedNumber } from '@/app/utils/FormattedNumber'
+import { toast } from 'react-toastify'
 
 export const ListProduct = () => {
     const list: ListItem[] = useSelector(selectList)
@@ -17,6 +18,7 @@ export const ListProduct = () => {
 
     const removeListProduct = (id: string) => {
         dispatch(removeList(id))
+        toast.success('Товар удален')
     }
 
     const toggleCompleteRpoduct = (id: string) => {
@@ -33,7 +35,7 @@ export const ListProduct = () => {
                     list.map((item, i) => (
                         <li
                             key={item.id}
-                            onClick={e => toggleCompleteRpoduct(item.id)}
+                            onDoubleClick={e => toggleCompleteRpoduct(item.id)}
                             className={`flex gap-3 items-center justify-between border border-white p-2 m-1 cursor-pointer ${
                                 item.isActive
                                     ? 'bg-violet-500 line-through bold text-dark'
