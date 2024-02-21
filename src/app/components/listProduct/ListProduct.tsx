@@ -5,7 +5,6 @@ import {
 } from '@/app/redux/slices/listSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { BsTrash2Fill } from 'react-icons/bs'
-import { CiEdit } from 'react-icons/ci'
 import { ListItem } from '@/app/redux/types/tipes'
 import { formattedNumber } from '@/app/utils/FormattedNumber'
 import { toast } from 'react-toastify'
@@ -28,6 +27,8 @@ export const ListProduct = () => {
         .filter((item: ListItem) => item.isActive)
         .reduce((a: number, b: ListItem) => a + b.price, 0)
 
+    console.log(list)
+
     return (
         <>
             <ul className='mt-4 w-full'>
@@ -42,13 +43,16 @@ export const ListProduct = () => {
                                     : null
                             } `}
                         >
-                            <span className='w-full text-2xl'>
+                            <span className='w-full text-xl'>
                                 {i + 1}. {item.name}
+                            </span>
+                            <span className='text-2xl text-bold'>
+                                {item.department}
                             </span>
                             <span className='text-2xl text-bold'>
                                 {formattedNumber(item.price)}
                             </span>
-                            <CiEdit size={40} className='hover:text-red-500' />
+
                             <BsTrash2Fill
                                 size={40}
                                 onClick={e => removeListProduct(item.id)}

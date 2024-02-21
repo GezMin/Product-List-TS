@@ -3,4 +3,5 @@ export type ListItem = {
     name: string
     price: number
     isActive: boolean
+    department: string
 }
