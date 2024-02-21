@@ -27,6 +27,7 @@ const dairy: Product[] = [
     { id: '13', name: 'Yogurt' },
     { id: '14', name: 'Butter' },
     { id: '15', name: 'Cream' },
+    { id: '16', name: 'Eggs' },
 ]
 
 const bakery: Product[] = [

@@ -4,10 +4,10 @@ import {
     toggleComplete,
 } from '@/app/redux/slices/listSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { formattedNumber } from '../utils/FormattedNumber'
 import { BsTrash2Fill } from 'react-icons/bs'
 import { CiEdit } from 'react-icons/ci'
 import { ListItem } from '@/app/redux/types/tipes'
+import { formattedNumber } from '@/app/utils/FormattedNumber'
 
 export const ListProduct = () => {
     const list: ListItem[] = useSelector(selectList)
