@@ -46,7 +46,7 @@ export const ListForm = () => {
 
     const handlePrice = (e: ChangeEvent<HTMLInputElement>) => {
         const input = e.target.value
-        const regex = /^[1-9]*(\.[0-9]{0,2})?$/ // 0.00
+        const regex = /^(?!0)\d*(\.\d{0,2})?$/ // 0.00
         if (regex.test(input) || input === '') {
             setPrice(input)
         }

@@ -9,9 +9,14 @@ import { GrCheckbox, GrCheckboxSelected } from 'react-icons/gr'
 import { ListItem } from '@/app/redux/types/tipes'
 import { formattedNumber } from '@/app/utils/FormattedNumber'
 import { toast } from 'react-toastify'
+import { useEffect } from 'react'
 
 export const ListProduct = () => {
     const list: ListItem[] = useSelector(selectList)
+
+    useEffect(() => {
+        localStorage.setItem('list', JSON.stringify(list))
+    }, [list])
 
     const sum = Number(
         list.reduce((a: number, b: ListItem) => a + b.price * b.count, 0),
@@ -32,7 +37,6 @@ export const ListProduct = () => {
 
     const uniqueListDepartment = new Set(list.map(item => item.department))
     const arrayFromSetDepartment = Array.from(uniqueListDepartment)
-    console.log(arrayFromSetDepartment)
 
     return (
         <>
