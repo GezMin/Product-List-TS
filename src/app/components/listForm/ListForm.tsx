@@ -3,9 +3,11 @@ import { useDispatch } from 'react-redux'
 import productsShop from '../../data/product'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { count } from 'console'
 
 export const ListForm = () => {
     const [name, setName] = useState<string>('')
+    const [countProduct, setCountProduct] = useState<number>(1)
     const [selectedDepartment, setSelectedDepartment] = useState<string>('')
     const [price, setPrice] = useState<string>('')
     const [filteredProducts, setFilteredProducts] = useState(productsShop)
@@ -20,6 +22,7 @@ export const ListForm = () => {
                 id: crypto.randomUUID(),
                 name,
                 department: selectedDepartment,
+                count: countProduct,
                 price: Number(price),
                 isActive: false,
             },
@@ -28,6 +31,7 @@ export const ListForm = () => {
         setName('')
         setPrice('')
         setSelectedDepartment('')
+        setCountProduct(1)
     }
 
     const handleDepartment = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,6 +52,14 @@ export const ListForm = () => {
         }
     }
 
+    const handleCountProduct = (e: ChangeEvent<HTMLInputElement>) => {
+        const input = e.target.value
+        const regex = /^[1-9]\d*$/
+        if (regex.test(input) || input === '') {
+            setCountProduct(Number(input))
+        }
+    }
+
     const handleListSlect = (e: MouseEvent<HTMLLIElement>) => {
         const target = e.target as HTMLLIElement
         if (!target) return
@@ -57,41 +69,50 @@ export const ListForm = () => {
     }
 
     return (
-        <div className='w-full text-2xl text-center p-1'>
-            <div className='flex flex-row justify-between  text-emerald-750 text-black'>
-                <div className='relative'>
-                    <input
-                        className='p-2 active:border-green-500'
-                        type='text'
-                        value={name}
-                        placeholder='продукт'
-                        onChange={handleDepartment}
-                    />
-                    {name.length > 2 && filteredProducts.length > 0 && (
-                        <ul className='absolute bg-white w-full mt-1 p-1 text-left'>
-                            {filteredProducts.map(item => (
-                                <li
-                                    key={item.id}
-                                    value={item.id}
-                                    onClick={handleListSlect}
-                                    className='hover:bg-slate-200 p-1 cursor-pointer'
-                                    data-department={item.department}
-                                >
-                                    {item.name}
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-                </div>
+        <div className='text-black'>
+            <div className='flex justify-between items-center gap-1 relative w-full mb-1'>
                 <input
-                    className='p-2 w-[100px]'
+                    className='w-full p-2 active:border-green-500'
+                    type='text'
+                    value={name}
+                    placeholder='продукт'
+                    onChange={handleDepartment}
+                />
+                {name.length > 2 && filteredProducts.length > 0 && (
+                    <ul className='absolute bg-white w-full mt-1 p-1 top-10 text-left'>
+                        {filteredProducts.map(item => (
+                            <li
+                                key={item.id}
+                                value={item.id}
+                                onClick={handleListSlect}
+                                className='hover:bg-slate-200 p-1 cursor-pointer'
+                                data-department={item.department}
+                            >
+                                {item.name}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+            <div className='flex gap-2 mt-2 justify-between items-center'>
+                <input
+                    className='p-2 w-1/3 active:border-green-500'
+                    type='number'
+                    value={countProduct}
+                    min={1}
+                    onChange={handleCountProduct}
+                    placeholder='кол-во'
+                />
+                <input
+                    className='p-2 w-1/3 active:border-green-500'
                     type='text'
                     value={price}
                     min={0}
                     onChange={handlePrice}
+                    placeholder='цена'
                 />
                 <button
-                    className='p-2 bg-orange-500 hover:bg-orange-700 text-white'
+                    className='p-2  bg-orange-500 hover:bg-orange-700 text-white'
                     onClick={addList}
                 >
                     Добавить

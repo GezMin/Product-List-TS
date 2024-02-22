@@ -4,4 +4,5 @@ export type ListItem = {
     price: number
     isActive: boolean
     department: string
+    count: number
 }

@@ -10,10 +10,10 @@ import { FilterProduct } from './components/filterProduct/FilterProduct'
 export default function Home() {
     return (
         <Provider store={store}>
-            <header className='flex flex-col items-center justify-center h-16 bg-violet-600 '>
+            <header className='w-full mx-auto h-12 bg-violet-600 '>
                 <h1 className='text-3xl text-center m-2'>Список покупок</h1>
             </header>
-            <main className='container mx-auto max-w-2xl flex flex-col items-center justify-start p-3 '>
+            <main className='sm w-full mx-auto max-w-2xl flex flex-col items-center justify-start p-3 '>
                 <ListForm />
                 <ListProduct />
                 <SaveTemplate />
@@ -21,7 +21,7 @@ export default function Home() {
             </main>
             <ToastContainer
                 position='top-left'
-                autoClose={3000}
+                autoClose={2000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
