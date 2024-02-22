@@ -49,7 +49,14 @@ export const ListProduct = () => {
                         >
                             {item}
                         </span>
-                    ) : null,
+                    ) : (
+                        <span
+                            key={i}
+                            className='text-[12px] text-center m-1 p-1 border-dotted border-2 rounded-md border-orange-500 bg-violet-500 cursor-pointer hover:bg-orange-500 hover:text-white '
+                        >
+                            прочее
+                        </span>
+                    ),
                 )}
             </div>
             <ul className='mt-4 w-full '>
@@ -93,7 +100,7 @@ export const ListProduct = () => {
                             </div>
                             <div className='w-full flex justify-between items-center'>
                                 <span className='text-[12px] w-1/3 text-center  p-0 border-dotted border-2 rounded-md border-orange-500'>
-                                    {item.department}
+                                    {item.department || 'прочее'}
                                 </span>
                                 <span className='text-[14px] w-full text-right'>
                                     {item.count} шт *{' '}

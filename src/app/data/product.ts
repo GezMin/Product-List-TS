@@ -59,6 +59,18 @@ const productsShop: Product[] = [
     { id: '52', name: 'Вино красное полусладкое', department: 'напитки' },
     { id: '53', name: 'Вино красное сухое', department: 'напитки' },
     { id: '54', name: 'Вино белое полусладкое', department: 'напитки' },
+    { id: '55', name: 'Колбаса докторская', department: 'мясо' },
+    { id: '56', name: 'Колбаса куриная', department: 'мясо' },
+    { id: '57', name: 'Колбаса сырокопченая', department: 'мясо' },
+    { id: '58', name: 'Сервилат финский', department: 'мясо' },
+    { id: '59', name: 'Бекон', department: 'мясо' },
+    { id: '60', name: 'Грудинка сырокопченая', department: 'мясо' },
+    { id: '61', name: 'Курица', department: 'мясо' },
+    { id: '62', name: 'Ряженка', department: 'молочка' },
+    { id: '63', name: 'Лук', department: 'овощи' },
+    { id: '64', name: 'Чипсы большие', department: 'салаты' },
+    { id: '64', name: 'Чипсы маленькие', department: 'салаты' },
+    { id: '65', name: 'Колбаса ', department: 'мясо' },
 ]
 
 export default productsShop
