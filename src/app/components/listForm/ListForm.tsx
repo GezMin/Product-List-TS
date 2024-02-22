@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css'
 
 export const ListForm = () => {
     const [name, setName] = useState<string>('')
-    const [department, setDepartment] = useState<string>('')
+    const [selectedDepartment, setSelectedDepartment] = useState<string>('')
     const [price, setPrice] = useState<string>('')
     const [filteredProducts, setFilteredProducts] = useState(productsShop)
     const dispatch = useDispatch()
@@ -19,7 +19,7 @@ export const ListForm = () => {
             payload: {
                 id: crypto.randomUUID(),
                 name,
-                department,
+                department: selectedDepartment,
                 price: Number(price),
                 isActive: false,
             },
@@ -27,14 +27,13 @@ export const ListForm = () => {
 
         setName('')
         setPrice('')
-        setDepartment('')
+        setSelectedDepartment('')
     }
 
     const handleDepartment = (e: ChangeEvent<HTMLInputElement>) => {
         const searchProduct = e.target.value
         setName(searchProduct)
 
-        // Производим фильтрацию по значению из инпута
         const filteredProducts = productsShop.filter(item =>
             item.name.toLowerCase().includes(searchProduct.toLowerCase()),
         )
@@ -53,7 +52,7 @@ export const ListForm = () => {
         const target = e.target as HTMLLIElement
         if (!target) return
         setName(target.textContent ?? '')
-        setDepartment(target.dataset.department ?? '')
+        setSelectedDepartment(target.dataset.department ?? '')
         setFilteredProducts([])
     }
 
@@ -76,6 +75,7 @@ export const ListForm = () => {
                                     value={item.id}
                                     onClick={handleListSlect}
                                     className='hover:bg-slate-200 p-1 cursor-pointer'
+                                    data-department={item.department}
                                 >
                                     {item.name}
                                 </li>

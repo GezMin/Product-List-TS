@@ -5,6 +5,7 @@ import {
 } from '@/app/redux/slices/listSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { BsTrash2Fill } from 'react-icons/bs'
+import { GrCheckbox, GrCheckboxSelected } from 'react-icons/gr'
 import { ListItem } from '@/app/redux/types/tipes'
 import { formattedNumber } from '@/app/utils/FormattedNumber'
 import { toast } from 'react-toastify'
@@ -27,32 +28,56 @@ export const ListProduct = () => {
         .filter((item: ListItem) => item.isActive)
         .reduce((a: number, b: ListItem) => a + b.price, 0)
 
-    console.log(list)
-
     return (
         <>
+            <div className='mt-3 flex'>
+                {list.map((item, i) => (
+                    <span
+                        key={item.id}
+                        className='text-[14px] text-center m-1 p-1 border-dotted border-2 rounded-md border-orange-500 bg-violet-500 cursor-pointer hover:bg-orange-500 hover:text-white '
+                    >
+                        {item.department}
+                    </span>
+                ))}
+            </div>
             <ul className='mt-4 w-full'>
                 {list.length ? (
                     list.map((item, i) => (
                         <li
                             key={item.id}
-                            onDoubleClick={e => toggleCompleteRpoduct(item.id)}
-                            className={`flex gap-3 items-center justify-between border border-white p-2 m-1 cursor-pointer ${
+                            className={`flex gap-3 items-center justify-between border border-white p-2 m-1  ${
                                 item.isActive
-                                    ? 'bg-violet-500 line-through bold text-dark'
+                                    ? 'line-through text-green-400'
                                     : null
                             } `}
                         >
-                            <span className='w-full text-xl'>
+                            {!item.isActive ? (
+                                <GrCheckbox
+                                    size={40}
+                                    className='hover:text-green-500'
+                                    onClick={e =>
+                                        toggleCompleteRpoduct(item.id)
+                                    }
+                                />
+                            ) : (
+                                <GrCheckboxSelected
+                                    size={40}
+                                    className='hover:text-green-500'
+                                    onClick={e =>
+                                        toggleCompleteRpoduct(item.id)
+                                    }
+                                />
+                            )}
+
+                            <span className='w-full text-1'>
                                 {i + 1}. {item.name}
                             </span>
-                            <span className='text-2xl text-bold'>
+                            <span className='text-[12px] w-[250px] text-center  p-0 border-dotted border-2 rounded-md border-orange-500'>
                                 {item.department}
                             </span>
-                            <span className='text-2xl text-bold'>
+                            <span className='text-xl text-right w-[120px]'>
                                 {formattedNumber(item.price)}
                             </span>
-
                             <BsTrash2Fill
                                 size={40}
                                 onClick={e => removeListProduct(item.id)}
