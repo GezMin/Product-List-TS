@@ -7,7 +7,7 @@ import { count } from 'console'
 
 export const ListForm = () => {
     const [name, setName] = useState<string>('')
-    const [countProduct, setCountProduct] = useState<number>(1)
+    const [countProduct, setCountProduct] = useState<string>('1')
     const [selectedDepartment, setSelectedDepartment] = useState<string>('')
     const [price, setPrice] = useState<string>('')
     const [filteredProducts, setFilteredProducts] = useState(productsShop)
@@ -22,7 +22,7 @@ export const ListForm = () => {
                 id: crypto.randomUUID(),
                 name,
                 department: selectedDepartment,
-                count: countProduct,
+                count: Number(countProduct),
                 price: Number(price),
                 isActive: false,
             },
@@ -31,7 +31,7 @@ export const ListForm = () => {
         setName('')
         setPrice('')
         setSelectedDepartment('')
-        setCountProduct(1)
+        setCountProduct('1')
     }
 
     const handleDepartment = (e: ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +46,7 @@ export const ListForm = () => {
 
     const handlePrice = (e: ChangeEvent<HTMLInputElement>) => {
         const input = e.target.value
-        const regex = /^[0-9]*(\.[0-9]{0,2})?$/ // 0.00
+        const regex = /^[1-9]*(\.[0-9]{0,2})?$/ // 0.00
         if (regex.test(input) || input === '') {
             setPrice(input)
         }
@@ -56,7 +56,7 @@ export const ListForm = () => {
         const input = e.target.value
         const regex = /^[1-9]\d*$/
         if (regex.test(input) || input === '') {
-            setCountProduct(Number(input))
+            setCountProduct(input)
         }
     }
 
@@ -97,9 +97,9 @@ export const ListForm = () => {
             <div className='flex gap-2 mt-2 justify-between items-center'>
                 <input
                     className='p-2 w-1/3 active:border-green-500'
-                    type='number'
+                    type='text'
                     value={countProduct}
-                    min={1}
+                    min={0}
                     onChange={handleCountProduct}
                     placeholder='кол-во'
                 />
