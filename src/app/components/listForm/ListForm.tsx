@@ -8,12 +8,12 @@ export const ListForm = () => {
     const [name, setName] = useState<string>('')
     const [countProduct, setCountProduct] = useState<string>('1')
     const [selectedDepartment, setSelectedDepartment] = useState<string>('')
-    const [price, setPrice] = useState<string>('0')
+    const [price, setPrice] = useState<string>('')
     const [filteredProducts, setFilteredProducts] = useState(productsShop)
     const dispatch = useDispatch()
 
     const addList = () => {
-        if (!name || !price) return toast.info('Заполните все поля')
+        if (!name) return toast.info('Заполните наименование')
 
         dispatch({
             type: 'list/addList',
@@ -28,7 +28,7 @@ export const ListForm = () => {
         })
 
         setName('')
-        setPrice('0')
+        setPrice('')
         setSelectedDepartment('')
         setCountProduct('1')
     }
