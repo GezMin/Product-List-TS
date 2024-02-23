@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { ListItem } from '../types/tipes'
+import { ListItem } from '../../types/tipes'
 
 const initialState: { list: ListItem[] } = {
     list: [],
@@ -21,12 +21,20 @@ const listSlice = createSlice({
                 item.isActive = !item.isActive
             }
         },
+        editList: (state, action: PayloadAction<ListItem>) => {
+            const item = state.list.find(item => item.id === action.payload.id)
+            if (item) {
+                item.price = action.payload.price
+                item.count = action.payload.count
+            }
+        },
     },
 })
 
 export default listSlice.reducer
 
-export const { addList, removeList, toggleComplete } = listSlice.actions
+export const { addList, removeList, toggleComplete, editList } =
+    listSlice.actions
 
 export const selectList = (state: { list: { list: ListItem[] } }) =>
     state.list.list

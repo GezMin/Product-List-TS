@@ -6,12 +6,21 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { BsTrash2Fill } from 'react-icons/bs'
 import { GrCheckbox, GrCheckboxSelected } from 'react-icons/gr'
-import { ListItem } from '@/app/redux/types/tipes'
+import { FaRegEdit } from 'react-icons/fa'
+import { ListItem } from '@/app/types/tipes'
 import { formattedNumber } from '@/app/utils/FormattedNumber'
 import { toast } from 'react-toastify'
-import { useEffect } from 'react'
+import { ChangeEvent, Children, useEffect, useState } from 'react'
+import { Modal } from '../modal/Modal'
 
 export const ListProduct = () => {
+    const [openModal, setOpenModal] = useState<boolean>(false)
+    const [selectedItem, setSelectedItem] = useState<ListItem | null>(null)
+
+    const [countProduct, setCountProduct] = useState<string>('')
+    const [price, setPrice] = useState<string>('')
+    const [id, setId] = useState<string>('')
+
     const list: ListItem[] = useSelector(selectList)
 
     useEffect(() => {
@@ -38,8 +47,86 @@ export const ListProduct = () => {
     const uniqueListDepartment = new Set(list.map(item => item.department))
     const arrayFromSetDepartment = Array.from(uniqueListDepartment)
 
+    const openModalForEdit = (id: string) => {
+        const item = list.find(item => item.id === id)
+        if (item) {
+            setSelectedItem(item)
+            setCountProduct(String(item.count))
+            setPrice(String(item.price))
+            setId(id)
+            setOpenModal(true)
+        } else {
+            console.error(`No item found with id: ${id}`)
+        }
+    }
+
+    const handlePrice = (e: ChangeEvent<HTMLInputElement>) => {
+        const input = e.target.value
+        const regex = /^(?!0)\d*(\.\d{0,2})?$/ // 0.00
+        if (regex.test(input) || input === '') {
+            setPrice(input)
+        }
+    }
+
+    const handleCountProduct = (e: ChangeEvent<HTMLInputElement>) => {
+        const input = e.target.value
+        const regex = /^[1-9]\d*$/
+        if (regex.test(input) || input === '') {
+            setCountProduct(input)
+        }
+    }
+    const editList = () => {
+        dispatch({
+            type: 'list/editList',
+            payload: {
+                id,
+                count: Number(countProduct),
+                price: Number(price),
+            },
+        })
+
+        setOpenModal(false)
+        handleCloseModal()
+    }
+
+    const handleCloseModal = () => {
+        setOpenModal(false)
+        setSelectedItem(null)
+    }
+
     return (
         <>
+            <Modal openModal={openModal} onClose={handleCloseModal}>
+                <div className='text-left text-2xl'>
+                    Товар: {selectedItem?.name}
+                </div>
+                <div className='flex gap-2 mt-2 justify-between items-center'>
+                    <label>Кол-во</label>
+                    <input
+                        className='p-2 w-1/4 border border-gray-500'
+                        type='text'
+                        value={countProduct}
+                        min={0}
+                        onChange={handleCountProduct}
+                        placeholder='кол-во'
+                    />
+                    <label>Цена</label>
+                    <input
+                        className='p-2 w-1/4 border border-gray-500'
+                        type='text'
+                        value={price}
+                        min={0}
+                        onChange={handlePrice}
+                        placeholder='цена'
+                    />
+                    <button
+                        className='p-2  bg-orange-500 hover:bg-orange-700 text-white'
+                        onClick={editList}
+                    >
+                        Сохранить
+                    </button>
+                </div>
+            </Modal>
             <div className='mt-3 flex flex-wrap'>
                 {arrayFromSetDepartment.map((item, i) =>
                     item ? (
@@ -92,6 +179,11 @@ export const ListProduct = () => {
                                 <span className='w-full text-1 pl-2'>
                                     {i + 1}. {item.name}
                                 </span>
+                                <FaRegEdit
+                                    size={25}
+                                    onClick={e => openModalForEdit(item.id)}
+                                    className='hover:text-red-500 mr-2'
+                                />
                                 <BsTrash2Fill
                                     size={25}
                                     onClick={e => removeListProduct(item.id)}

@@ -49,7 +49,7 @@ const productsShop: Product[] = [
     { id: '42', name: 'Кока-кола', department: 'напитки' },
     { id: '43', name: 'Сок', department: 'напитки' },
     { id: '44', name: 'Вода', department: 'напитки' },
-    { id: '45', name: 'Шоколад молочканый', department: 'сладости' },
+    { id: '45', name: 'Шоколад молочный', department: 'сладости' },
     { id: '46', name: 'Шоколад горький', department: 'сладости' },
     { id: '47', name: 'Шоколад с фундуком', department: 'сладости' },
     { id: '48', name: 'Шоколад с изюмом', department: 'сладости' },

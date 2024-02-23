@@ -3,13 +3,12 @@ import { useDispatch } from 'react-redux'
 import productsShop from '../../data/product'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { count } from 'console'
 
 export const ListForm = () => {
     const [name, setName] = useState<string>('')
     const [countProduct, setCountProduct] = useState<string>('1')
     const [selectedDepartment, setSelectedDepartment] = useState<string>('')
-    const [price, setPrice] = useState<string>('')
+    const [price, setPrice] = useState<string>('0')
     const [filteredProducts, setFilteredProducts] = useState(productsShop)
     const dispatch = useDispatch()
 
@@ -29,7 +28,7 @@ export const ListForm = () => {
         })
 
         setName('')
-        setPrice('')
+        setPrice('0')
         setSelectedDepartment('')
         setCountProduct('1')
     }
