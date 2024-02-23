@@ -101,7 +101,7 @@ export const ListProduct = () => {
                     Товар: {selectedItem?.name}
                 </div>
                 <div className='flex gap-2 mt-2 justify-between items-center'>
-                    <label>Кол-во</label>
+                    <label className='p-2 w-1/3'>Кол-во</label>
                     <input
                         className='p-2 w-1/4 border border-gray-500'
                         type='text'
@@ -112,7 +112,7 @@ export const ListProduct = () => {
                     />
                     <label>Цена</label>
                     <input
-                        className='p-2 w-1/4 border border-gray-500'
+                        className='p-2 w-1/3 border border-gray-500'
                         type='text'
                         value={price}
                         min={0}
