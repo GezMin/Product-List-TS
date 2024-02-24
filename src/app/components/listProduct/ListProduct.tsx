@@ -16,7 +16,6 @@ import { Modal } from '../modal/Modal'
 export const ListProduct = () => {
     const [openModal, setOpenModal] = useState<boolean>(false)
     const [selectedItem, setSelectedItem] = useState<ListItem | null>(null)
-
     const [countProduct, setCountProduct] = useState<string>('')
     const [price, setPrice] = useState<string>('')
     const [id, setId] = useState<string>('')
@@ -114,10 +113,11 @@ export const ListProduct = () => {
                     <input
                         className='p-2 w-1/3 border border-gray-500'
                         type='text'
-                        value={price}
+                        value={price === '0' ? '' : price}
                         min={0}
                         onChange={handlePrice}
                         placeholder='цена'
+                        autoFocus
                     />
                     <button
                         className='p-2  bg-orange-500 hover:bg-orange-700 text-white'

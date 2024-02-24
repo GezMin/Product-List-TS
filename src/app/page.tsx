@@ -5,7 +5,6 @@ import { store } from './redux/store'
 import { ListProduct } from './components/listProduct/ListProduct'
 import { SaveTemplate } from './components/saveTemplate/SaveTemplate'
 import { ToastContainer } from 'react-toastify'
-import { FilterProduct } from './components/filterProduct/FilterProduct'
 
 export default function Home() {
     return (
@@ -17,7 +16,6 @@ export default function Home() {
                 <ListForm />
                 <ListProduct />
                 <SaveTemplate />
-                {/* <FilterProduct /> */}
             </main>
             <ToastContainer
                 position='top-left'
