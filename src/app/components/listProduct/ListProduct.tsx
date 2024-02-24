@@ -10,7 +10,7 @@ import { FaRegEdit } from 'react-icons/fa'
 import { ListItem } from '@/app/types/tipes'
 import { formattedNumber } from '@/app/utils/FormattedNumber'
 import { toast } from 'react-toastify'
-import { ChangeEvent, Children, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { Modal } from '../modal/Modal'
 
 export const ListProduct = () => {
@@ -19,12 +19,19 @@ export const ListProduct = () => {
     const [countProduct, setCountProduct] = useState<string>('')
     const [price, setPrice] = useState<string>('')
     const [id, setId] = useState<string>('')
+    const priceInputRef = useRef<HTMLInputElement>(null)
 
     const list: ListItem[] = useSelector(selectList)
 
     useEffect(() => {
         localStorage.setItem('list', JSON.stringify(list))
     }, [list])
+
+    useEffect(() => {
+        if (openModal && priceInputRef.current) {
+            priceInputRef.current.focus()
+        }
+    }, [openModal])
 
     const sum = Number(
         list.reduce((a: number, b: ListItem) => a + b.price * b.count, 0),
@@ -111,13 +118,13 @@ export const ListProduct = () => {
                     />
                     <label>Цена</label>
                     <input
+                        ref={priceInputRef}
                         className='p-2 w-1/3 border border-gray-500'
                         type='text'
                         value={price === '0' ? '' : price}
                         min={0}
                         onChange={handlePrice}
                         placeholder='цена'
-                        autoFocus
                     />
                     <button
                         className='p-2  bg-orange-500 hover:bg-orange-700 text-white'
