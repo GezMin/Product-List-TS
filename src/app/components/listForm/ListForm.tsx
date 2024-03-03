@@ -20,7 +20,7 @@ export const ListForm = () => {
             payload: {
                 id: crypto.randomUUID(),
                 name,
-                department: selectedDepartment,
+                department: selectedDepartment ? selectedDepartment : 'прочее',
                 count: Number(countProduct),
                 price: Number(price),
                 isActive: false,
@@ -111,7 +111,7 @@ export const ListForm = () => {
                     placeholder='цена'
                 />
                 <button
-                    className='p-2  bg-orange-500 hover:bg-orange-700 text-white'
+                    className='p-2 bg-orange-500 hover:bg-orange-700 text-white'
                     onClick={addList}
                 >
                     Добавить

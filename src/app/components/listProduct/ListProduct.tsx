@@ -100,6 +100,19 @@ export const ListProduct = () => {
         setSelectedItem(null)
     }
 
+    const handleDepartment = (e: ChangeEvent<HTMLButtonElement>) => {
+        const searchProduct: string | null = e.target.textContent
+
+        if (searchProduct !== null) {
+            const filteredDepartment: ListItem[] = list.filter(
+                item =>
+                    item.department.toLowerCase() ===
+                    searchProduct.toLowerCase(),
+            )
+            
+        }
+    }
+
     return (
         <>
             <Modal openModal={openModal} onClose={handleCloseModal}>
@@ -135,23 +148,15 @@ export const ListProduct = () => {
                 </div>
             </Modal>
             <div className='mt-3 flex flex-wrap'>
-                {arrayFromSetDepartment.map((item, i) =>
-                    item ? (
-                        <span
-                            key={i}
-                            className='text-[12px] text-center m-1 p-1 border-dotted border-2 rounded-md border-orange-500 bg-violet-500 cursor-pointer hover:bg-orange-500 hover:text-white '
-                        >
-                            {item}
-                        </span>
-                    ) : (
-                        <span
-                            key={i}
-                            className='text-[12px] text-center m-1 p-1 border-dotted border-2 rounded-md border-orange-500 bg-violet-500 cursor-pointer hover:bg-orange-500 hover:text-white '
-                        >
-                            прочее
-                        </span>
-                    ),
-                )}
+                {arrayFromSetDepartment.map((item, i) => (
+                    <button
+                        onClick={handleDepartment}
+                        key={i}
+                        className='text-[12px] text-center m-1 p-1 border-dotted border-2 rounded-md border-orange-500 bg-violet-500 cursor-pointer hover:bg-orange-500 hover:text-white'
+                    >
+                        {item}
+                    </button>
+                ))}
             </div>
             <ul className='mt-4 w-full '>
                 {list.length ? (
